@@ -375,7 +375,7 @@ const AboutPageContent: React.FC = () => {
         <div className="FullWidthMedia_split">
           <div className="FullWidthMedia_inner FullWidthMedia_image">
             <div className="FullWidthMedia_bg">
-              <img src="/photo-4.webp" alt="Two people at a computer" className="FullWidthMedia_img" />
+              <img src="/photo-4.png" alt="Two people at a computer" className="FullWidthMedia_img" />
             </div>
           </div>
           <div className="FullWidthMedia_copy">

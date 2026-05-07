@@ -7,7 +7,7 @@ import TeamPage from "./pages/TeamPage";
 
 export default function App() {
   return (
-    <BrowserRouter>
+    <BrowserRouter basename={import.meta.env.BASE_URL}>
       <Routes>
         <Route element={<RootLayout />}>
           <Route index element={<Home />} />

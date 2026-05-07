@@ -375,15 +375,15 @@ const Home: React.FC = () => {
         <div className="hq-wrapper">
 
           <picture ref={img1Ref as React.Ref<HTMLElement>} className="hq-image hq-image1">
-            <img src="/photo-1.webp" alt="Garheng Kong talking" style={{ width:"100%", height:"100%", objectFit:"cover", borderRadius:"var(--tile-radius)", display:"block" }} />
+            <img src="/photo-1.png" alt="Garheng Kong talking" style={{ width:"100%", height:"100%", objectFit:"cover", borderRadius:"var(--tile-radius)", display:"block" }} />
           </picture>
 
           <picture ref={img2Ref as React.Ref<HTMLElement>} className="hq-image hq-image2">
-            <img src="/photo-2.webp" alt="Meeting table discussion" style={{ width:"100%", height:"100%", objectFit:"cover", borderRadius:"var(--tile-radius)", display:"block" }} />
+            <img src="/photo-2.png" alt="Meeting table discussion" style={{ width:"100%", height:"100%", objectFit:"cover", borderRadius:"var(--tile-radius)", display:"block" }} />
           </picture>
 
           <picture ref={img3Ref as React.Ref<HTMLElement>} className="hq-image hq-image3">
-            <img src="/photo-3.webp" alt="Three people at desk" style={{ width:"100%", height:"100%", objectFit:"cover", borderRadius:"var(--tile-radius)", display:"block" }} />
+            <img src="/photo-3.png" alt="Three people at desk" style={{ width:"100%", height:"100%", objectFit:"cover", borderRadius:"var(--tile-radius)", display:"block" }} />
           </picture>
 
           <article ref={tile1Ref as React.Ref<HTMLElement>} className="hq-tile hq-tile1">
@@ -471,7 +471,7 @@ const Home: React.FC = () => {
             <div className="FullWidthMedia_inner FullWidthMedia_image">
               <div className="FullWidthMedia_bg">
                 <img
-                  src="/photo-4.webp"
+                  src="/photo-4.png"
                   alt="Two people at a computer"
                   className="FullWidthMedia_img"
                 />
