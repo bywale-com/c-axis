@@ -112,6 +112,23 @@ const Home: React.FC = () => {
   const newsRef    = useRef<HTMLElement>(null);
   const [missionHover, setMissionHover] = useState<"why" | null>(null);
   const [focusIndex, setFocusIndex] = useState(0);
+  const [showPreloader, setShowPreloader] = useState(true);
+  const [preloaderExiting, setPreloaderExiting] = useState(false);
+
+  useEffect(() => {
+    const startExitTimer = window.setTimeout(() => {
+      setPreloaderExiting(true);
+    }, 4000);
+
+    const removeTimer = window.setTimeout(() => {
+      setShowPreloader(false);
+    }, 4800);
+
+    return () => {
+      window.clearTimeout(startExitTimer);
+      window.clearTimeout(removeTimer);
+    };
+  }, []);
 
   useEffect(() => {
     if (OUR_FOCUS.length <= 1) return;
@@ -369,6 +386,22 @@ const Home: React.FC = () => {
   return (
     <>
       <style>{STYLES}</style>
+      {showPreloader && (
+        <div className={`hq-home-preloader${preloaderExiting ? " hq-home-preloader--exit" : ""}`} aria-hidden>
+          <div className="hq-home-preloader__cube">
+            <div className="hq-cube-stage">
+              <div className="hq-cube-roll">
+                <div className="hq-cube-face hq-cube-face--front">Offer Design</div>
+                <div className="hq-cube-face hq-cube-face--back">Pipeline</div>
+                <div className="hq-cube-face hq-cube-face--left">Revenue</div>
+                <div className="hq-cube-face hq-cube-face--right">Systems</div>
+                <div className="hq-cube-face hq-cube-face--top">Audit</div>
+                <div className="hq-cube-face hq-cube-face--bottom">Results</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
 
       <div ref={blockRef} className="hq-block">
         <div className="hq-spacer" />
@@ -625,6 +658,38 @@ const Home: React.FC = () => {
 
 const STYLES = `
 /* Home-only styles (tokens & base typography: src/styles/globals.css) */
+
+/* ── Home preloader ─────────────────────────────────────────────────── */
+.hq-home-preloader {
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  background: var(--grey-darkest);
+  display: grid;
+  place-items: center;
+  transform: translateY(0);
+}
+.hq-home-preloader--exit {
+  animation: hq-home-preloader-wipe-up 0.8s cubic-bezier(0.22, 0.61, 0.36, 1) forwards;
+}
+@keyframes hq-home-preloader-wipe-up {
+  from { transform: translateY(0); }
+  to { transform: translateY(-100%); }
+}
+.hq-home-preloader__cube {
+  width: min(72vw, 460px);
+  min-height: 280px;
+  display: grid;
+  place-items: center;
+}
+.hq-home-preloader .hq-cube-roll {
+  animation-duration: 3.8s;
+}
+.hq-home-preloader .hq-cube-face {
+  border: 2px solid rgba(15, 17, 24, 0.2);
+  color: #0f1118;
+  background-color: #ffffff;
+}
 
 /* ── imageZoom — source: animation:zoomOut 1s ease forwards ─────────── */
 @keyframes zoomOut {

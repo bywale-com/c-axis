@@ -12,7 +12,18 @@ type TeamMember = {
 /** Rows of `HqNewsCard`s — height styled in TeamPage.css */
 const TEAM_ROWS: TeamMember[][] = [
   [
-    { name: "Wale Omotayo", title: "Founder & Division Lead", href: "#" },
+    { name: "Sarah Chen", title: "Chief Operating Officer", href: "#" },
+    { name: "Michael Grant", title: "Head of Delivery", href: "#" },
+    { name: "Wally Omotayo", title: "Partnerships Lead", href: "#" },
+  ],
+  [
+    { name: "Priya Nair", title: "Client Success Director", href: "#" },
+    { name: "David Kim", title: "Revenue Systems Manager", href: "#" },
+    { name: "Elena Martinez", title: "Implementation Lead", href: "#" },
+  ],
+  [
+    { name: "James Okafor", title: "Operations Analyst", href: "#" },
+    { name: "Nina Patel", title: "Program Coordinator", href: "#" },
   ],
 ];
 
@@ -51,7 +62,7 @@ const TeamPage: React.FC = () => (
         <div className="hq-team-panel">
           <header className="hq-team-panel__header">
             <div className="hq-team-panel__mesh" aria-hidden />
-            <h2 className="hq-team-panel__title">Investment Team</h2>
+            <h2 className="hq-team-panel__title">Operations Team</h2>
             <div className="hq-team-panel__rule" aria-hidden />
           </header>
           <div className="hq-team-cards-stack">
