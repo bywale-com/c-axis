@@ -191,7 +191,7 @@ const NAV_STYLES = `
 .hq-nav-apex .c-site-header__brand,
 .hq-nav-apex .c-site-header__nav {
   position: static !important;
-  display: flex;
+  display: flex !important;
   align-items: center;
 }
 
