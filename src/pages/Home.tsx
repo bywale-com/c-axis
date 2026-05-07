@@ -1206,8 +1206,17 @@ const STYLES = `
     flex-flow:column;
     overflow:visible;
   }
-  .hq-image, .hq-tile {
+  .hq-image {
     position:static !important; width:100% !important; height:auto !important;
+    opacity:1 !important; visibility:visible !important; border-radius:0.75rem;
+    transform:none !important;
+  }
+  .hq-tile {
+    /* relative instead of static: keeps ::before pseudo-elements scoped to the tile
+       so overflow:hidden clips their large decorative circles. static breaks the
+       containing-block relationship — the circles escape onto the page and widen
+       it past the viewport, causing iOS Safari to extend fixed elements like the nav. */
+    position:relative !important; width:100% !important; height:auto !important;
     opacity:1 !important; visibility:visible !important; border-radius:0.75rem;
     transform:none !important;
   }
