@@ -1,0 +1,274 @@
+/* Team hero — headline + right flex row (HqNewsCard) */
+
+.hq-team-hero {
+  position: relative;
+  background: var(--white);
+  overflow: visible;
+  /* ~full viewport width minus ~10% total horizontal inset */
+  padding: clamp(4rem, 10vw, 6.5rem) max(1.25rem, 5vw) clamp(4rem, 14vw, 9rem);
+}
+
+.hq-team-hero__row {
+  position: relative;
+  z-index: 1;
+  width: 100%;
+  max-width: none;
+  margin: 0;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: clamp(1.75rem, 4vw, 3rem);
+}
+
+.hq-team-hero__copy {
+  flex: 1 1 17rem;
+  min-width: 0;
+  max-width: 42rem;
+  /* Pin headline column while the taller cards column scrolls (desktop two-column layout) */
+  position: sticky;
+  top: calc(var(--hq-fixed-nav-clearance, 6.5rem) + 0.75rem);
+  align-self: flex-start;
+  z-index: 2;
+}
+
+.hq-team-hero__copy .hq-subtitle2 {
+  margin-bottom: 1.5rem;
+  color: var(--grey-darkest);
+}
+
+/* Same scale as Home HeroInner_title / main section headers */
+.hq-team-hero__title {
+  font-weight: 600;
+  font-size: clamp(2.5rem, 5.5vw, 5rem);
+  line-height: 1.05;
+  letter-spacing: -0.03em;
+  color: var(--grey-darkest);
+}
+
+.hq-team-hero__title .hq-pill {
+  transform-origin: 50% 60%;
+}
+
+/* Right column — panel stacks header + card row; fills remaining flex space */
+.hq-team-hero__right {
+  flex: 1 1 22rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: stretch;
+  min-width: 0;
+}
+
+.hq-team-panel {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  gap: clamp(1rem, 2.25vw, 1.5rem);
+}
+
+/* Visual break between investment cards and the next category header */
+.hq-team-panel__group--next-category {
+  padding-top: clamp(2.25rem, 6vw, 4rem);
+}
+
+.hq-partner-firms-grid {
+  margin-top: clamp(0.85rem, 1.8vw, 1.35rem);
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: clamp(0.5rem, 1.1vw, 0.9rem);
+}
+
+/* Same card silhouette family as existing cards, but image-only and no arrow button */
+.hq-partner-firm-card {
+  position: relative;
+  border-radius: 0.75rem;
+  overflow: hidden;
+  background: var(--grey-light);
+  min-height: clamp(8.5rem, 12vw, 11rem);
+}
+
+.hq-partner-firm-card::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 2.5rem;
+  height: 2.5rem;
+  background: var(--white);
+  clip-path: polygon(100% 0, 100% 100%, 0 0);
+  pointer-events: none;
+  z-index: 2;
+}
+
+.hq-partner-firm-card__image {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: filter 0.22s ease, transform 0.22s ease;
+  filter: saturate(0.95);
+}
+
+.hq-partner-firm-card:hover .hq-partner-firm-card__image {
+  filter: saturate(1.12) hue-rotate(-7deg) brightness(0.9);
+  transform: scale(1.02);
+}
+
+/* — Section header: title + full-width rule + corner mesh — */
+.hq-team-panel__header {
+  position: relative;
+  width: 100%;
+  padding-top: 0.35rem;
+}
+
+.hq-team-panel__mesh {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: clamp(4.5rem, 12vw, 7rem);
+  height: clamp(2.25rem, 5vw, 3.25rem);
+  pointer-events: none;
+  opacity: 1;
+  background-image: repeating-linear-gradient(
+      52deg,
+      transparent 0,
+      transparent 5px,
+      rgba(39, 42, 42, 0.07) 5px,
+      rgba(39, 42, 42, 0.07) 5.5px
+    ),
+    repeating-linear-gradient(
+      -52deg,
+      transparent 0,
+      transparent 5px,
+      rgba(39, 42, 42, 0.055) 5px,
+      rgba(39, 42, 42, 0.055) 5.5px
+    );
+}
+
+.hq-team-panel__title {
+  position: relative;
+  z-index: 1;
+  font-size: clamp(1.125rem, 1.45vw, 1.375rem);
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  line-height: 1.25;
+  color: var(--grey-darkest);
+  padding-bottom: 0.65rem;
+  padding-left: 0.125rem;
+}
+
+.hq-team-panel__rule {
+  width: 100%;
+  height: 1px;
+  background: var(--grey-darkest);
+}
+
+.hq-team-cards-stack {
+  --hq-team-card-gap: clamp(0.5rem, 1.25vw, 1rem);
+  /* ~one home news card vertical footprint; team cards use `calc(... * 2)` */
+  --hq-team-news-card-unit-height: clamp(10.5rem, 22vw, 13.75rem);
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  gap: var(--hq-team-card-gap);
+  width: 100%;
+  min-width: 0;
+}
+
+.hq-team-cards {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  align-items: stretch;
+  justify-content: flex-start;
+  gap: var(--hq-team-card-gap);
+  width: 100%;
+  min-width: 0;
+}
+
+.hq-team-cards__cell {
+  flex: 1 1 0;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Last row with fewer than 3 cards: same column width as full rows, left-aligned */
+.hq-team-cards--partial {
+  justify-content: flex-start;
+}
+
+.hq-team-cards--partial .hq-team-cards__cell {
+  flex: 0 0 calc((100% - 2 * var(--hq-team-card-gap)) / 3);
+  max-width: calc((100% - 2 * var(--hq-team-card-gap)) / 3);
+}
+
+/* Investment team cards: 2× `--hq-team-news-card-unit-height` (see `.hq-team-cards-stack`) */
+.hq-team-cards-stack .hq-news-card {
+  flex: 1;
+  width: 100%;
+  min-height: calc(var(--hq-team-news-card-unit-height) * 2);
+  height: 100%;
+}
+
+@media (max-width: 1100px) {
+  .hq-team-hero__row {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .hq-team-hero__copy {
+    position: static;
+    top: auto;
+    z-index: auto;
+  }
+
+  .hq-team-hero__right {
+    justify-content: stretch;
+    width: 100%;
+  }
+
+  .hq-team-cards {
+    justify-content: flex-start;
+  }
+
+  .hq-partner-firms-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+/* Narrow viewports: keep a single horizontal row via scroll so three cards stay “parallel” */
+@media (max-width: 720px) {
+  .hq-team-panel {
+    max-width: none;
+  }
+
+  .hq-team-cards {
+    flex-wrap: nowrap;
+    justify-content: flex-start;
+    overflow-x: auto;
+    padding-bottom: 0.25rem;
+    scroll-snap-type: x mandatory;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  .hq-team-cards__cell {
+    flex: 0 0 min(78vw, 220px);
+    min-width: min(78vw, 220px);
+    scroll-snap-align: start;
+  }
+
+  .hq-team-cards--partial .hq-team-cards__cell {
+    flex: 0 0 min(78vw, 220px);
+    max-width: none;
+    min-width: min(78vw, 220px);
+  }
+
+  .hq-partner-firms-grid {
+    grid-template-columns: 1fr;
+    gap: 0.75rem;
+  }
+}

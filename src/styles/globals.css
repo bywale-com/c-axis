@@ -1,0 +1,251 @@
+@import url("https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700&display=swap");
+
+:root {
+  --grey-darkest: #0f1118;
+  --grey-dark: #1a1e28;
+  --grey-mid: #8c8a85;
+  --grey-light: #ede9e2;
+  --green-dark: #b8945a;
+  --green-mid: #d4b483;
+  --green-light: #f0dfc0;
+  --green-pale: #faf7f2;
+  --white: #ffffff;
+  --apex-gold: #b8945a;
+  --apex-gold-light: #d4b483;
+  --apex-gold-pale: #f0dfc0;
+  --apex-cream: #f8f6f1;
+  --apex-obsidian: #0f1118;
+  --br-sonoma: "DM Sans", "Helvetica Neue", sans-serif;
+  --border: 1.25rem;
+  --img-border: 0.3125rem;
+  --tile-radius: 0.75rem;
+  /* Fixed Apex header — space for `position: sticky` blocks (e.g. Team page hero copy) */
+  --hq-fixed-nav-clearance: clamp(4.5rem, 12vw, 6.5rem);
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+html {
+  font-size: 16px;
+  scroll-behavior: smooth;
+}
+body {
+  font-family: var(--br-sonoma);
+  background: #f8f6f1;
+  color: var(--grey-darkest);
+  -webkit-font-smoothing: antialiased;
+  /* `hidden` breaks descendant `position: sticky`; `clip` suppresses horizontal scroll without that bug */
+  overflow-x: clip;
+}
+a {
+  text-decoration: none;
+  color: inherit;
+}
+ul {
+  list-style: none;
+}
+
+.h1 {
+  font-weight: 600;
+  font-size: clamp(2.5rem, 6vw, 10rem);
+  line-height: 0.87;
+  letter-spacing: -0.03em;
+}
+.h2 {
+  font-weight: 600;
+  font-size: clamp(2.25rem, 5vw, 5rem);
+  line-height: 1.05;
+  letter-spacing: -0.03em;
+}
+.h3 {
+  font-weight: 600;
+  font-size: clamp(1.8rem, 3vw, 4.375rem);
+  line-height: 1.1;
+  letter-spacing: -0.015em;
+}
+.h5 {
+  font-weight: 600;
+  font-size: clamp(1.25rem, 2vw, 2rem);
+  line-height: 1.2;
+  letter-spacing: -0.02em;
+}
+.h4 {
+  font-weight: 600;
+  font-size: clamp(1rem, 1.5vw, 3.75rem);
+  line-height: 1.1;
+  letter-spacing: -0.02em;
+}
+.h6 {
+  font-weight: 600;
+  font-size: clamp(0.9rem, 1vw, 1.875rem);
+  line-height: 1.4;
+  letter-spacing: -0.01em;
+}
+
+.hq-subtitle2 {
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: -0.01em;
+  display: flex;
+  align-items: center;
+  gap: 0.375rem;
+  margin-bottom: 0.625rem;
+}
+.hq-subtitle2::before {
+  content: "";
+  display: block;
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--green-dark);
+  flex-shrink: 0;
+}
+
+/* Pill outline — matches home hero / metrics (HealthQuest pattern) */
+.hq-pill {
+  display: inline-block;
+  border: 2px solid var(--green-dark);
+  border-radius: 9999px;
+  padding: 0.05em 0.35em;
+  white-space: nowrap;
+}
+
+/* ── Arrow button (tiles, news cards, team cards) ─────────────────────── */
+.hq-arrow-btn {
+  display: flex;
+  align-items: center;
+  background: transparent;
+  border: none;
+  text-decoration: none;
+}
+.hq-arrow-btn__icon {
+  display: flex;
+  width: 3.75rem;
+  min-width: 3.75rem;
+  border-radius: 50%;
+  aspect-ratio: 1 / 1;
+  align-items: center;
+  justify-content: center;
+  background: var(--grey-darkest);
+  transition: 0.4s ease-in-out;
+  transition-property: background-color, transform, opacity;
+  cursor: pointer;
+}
+.hq-arrow-btn__icon svg {
+  width: 1.75rem;
+  height: 1.3125rem;
+  filter: invert(1);
+  transform: rotate(-45deg);
+  transition: transform 0.4s ease-in-out;
+}
+.hq-arrow-btn:hover .hq-arrow-btn__icon svg {
+  transform: rotate(0deg);
+}
+.hq-tile:hover .hq-arrow-btn__icon {
+  background-color: var(--green-light);
+}
+.hq-tile:hover .hq-arrow-btn__icon svg {
+  transform: rotate(0deg);
+  filter: invert(0);
+}
+
+/* Shared section shell (home below-fold + routed pages e.g. latest news band) */
+.hq-section {
+  padding: 8.5rem 2.5rem;
+  width: 100%;
+  max-width: none;
+  margin: 0;
+}
+.hq-eyebrow {
+  display: block;
+  margin-bottom: 2.5rem;
+}
+
+/* ── News card (home Latest news + Team featured row) ───────────────── */
+.hq-news-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 1.25rem;
+  align-items: stretch;
+}
+.hq-news-card {
+  padding: 1.75rem;
+  background: var(--grey-light);
+  border-radius: 0.75rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.875rem;
+  cursor: pointer;
+  transition: background 0.25s;
+  position: relative;
+  overflow: hidden;
+  min-height: clamp(17rem, 24vw, 21rem);
+  height: 100%;
+}
+.hq-news-card::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 2.5rem;
+  height: 2.5rem;
+  background: var(--white);
+  clip-path: polygon(100% 0, 100% 100%, 0 0);
+}
+.hq-news-card:hover {
+  background: var(--green-pale);
+}
+.hq-news-tag {
+  color: var(--green-dark);
+}
+.hq-news-headline {
+  flex: 1;
+  color: var(--grey-darkest);
+}
+.hq-news-date {
+  font-size: 0.8125rem;
+  color: var(--grey-mid);
+}
+
+/* Home news inset should match Our Focus section gutters */
+.hq-section--news {
+  padding-left: 2.5rem;
+  padding-right: 2.5rem;
+}
+
+@media (max-width: 959px) {
+  .hq-section {
+    padding: 2.75rem 1.25rem;
+  }
+
+  .hq-news-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .hq-section--news {
+    padding-left: 1.25rem;
+    padding-right: 1.25rem;
+  }
+}
+
+/* Routed pages (non-home) */
+.hq-route-main {
+  min-height: 50vh;
+}
+.hq-simple-page {
+  max-width: 48rem;
+  margin: 0 auto;
+  padding: 5.5rem 1.25rem 5rem;
+}
+.hq-simple-page__lede {
+  margin-top: 1.5rem;
+  font-size: 1.125rem;
+  line-height: 1.75;
+  color: var(--grey-dark);
+  max-width: 42ch;
+}

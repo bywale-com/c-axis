@@ -1,0 +1,208 @@
+/* Apex-style footer layout, HealthQuest palette + branded CTA */
+
+.hq-site-footer {
+  background: var(--grey-darkest, #272a2a);
+  padding: 5rem 2.5rem 4rem;
+  color: #fff;
+}
+
+.hq-footer-shell {
+  max-width: 1400px;
+  margin: 0 auto;
+}
+
+.hq-footer-cta-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 2rem 3rem;
+  align-items: end;
+}
+
+.hq-footer-cta-grid .hq-footer-cta-logo {
+  margin-bottom: 2rem;
+}
+
+.hq-footer-cta-grid .hq-footer-cta-logo img {
+  height: 55px;
+  width: auto;
+  object-fit: contain;
+  display: block;
+}
+
+.hq-footer-cta-grid h2 {
+  color: #fff;
+  font-size: clamp(1.75rem, 3.5vw, 2.25rem);
+  line-height: 1.15;
+  font-weight: 600;
+  letter-spacing: -0.02em;
+  max-width: 20ch;
+}
+
+.hq-footer-cta-grid > div > p {
+  margin-top: 1.5rem;
+  color: rgba(255, 255, 255, 0.55);
+  max-width: 28rem;
+  font-size: 1rem;
+  line-height: 1.65;
+  font-weight: 400;
+}
+
+.hq-footer-cta-action {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+}
+
+.hq-site-footer hr {
+  border: none;
+  border-top: 1px solid rgba(255, 255, 255, 0.12);
+  margin: 3rem 0;
+}
+
+.hq-footer-links-grid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 2rem 1.5rem;
+}
+
+.hq-footer-label {
+  font-size: 0.6875rem;
+  letter-spacing: 0.12em;
+  color: rgba(255, 255, 255, 0.45);
+  margin-bottom: 1rem;
+  font-weight: 600;
+  text-transform: uppercase;
+}
+
+.hq-footer-copy {
+  color: rgba(255, 255, 255, 0.55);
+  font-size: 0.875rem;
+  line-height: 1.65;
+  margin-bottom: 1rem;
+}
+
+.hq-footer-links-grid a.hq-footer-link {
+  color: #fff;
+  display: block;
+  margin-bottom: 0.625rem;
+  font-size: 1rem;
+  font-weight: 500;
+  transition: color 0.2s;
+}
+
+.hq-footer-links-grid a.hq-footer-link:hover {
+  color: var(--green-light, #c5e5a3);
+}
+
+.hq-footer-connect-icons {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.625rem;
+  margin-top: 0.25rem;
+}
+
+.hq-social-btn {
+  width: 2.75rem;
+  height: 2.75rem;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.08);
+  color: rgba(255, 255, 255, 0.75);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background 0.25s, color 0.25s;
+}
+
+.hq-social-btn:hover {
+  background: var(--green-light, #c5e5a3);
+  color: var(--grey-darkest, #272a2a);
+}
+
+.hq-footer-cta-btn {
+  display: inline-flex;
+  align-items: stretch;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  font-weight: 600;
+  font-size: 0.8125rem;
+  text-decoration: none;
+  color: var(--grey-darkest, #272a2a);
+  background: var(--green-light, #c5e5a3);
+  border-radius: 2px;
+  overflow: hidden;
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.hq-footer-cta-btn:hover {
+  transform: scale(1.02);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
+}
+
+.hq-footer-cta-btn__text {
+  padding: 0.75rem 1.25rem;
+  display: grid;
+  place-items: center;
+}
+
+.hq-footer-cta-btn__icon {
+  width: 2.75rem;
+  display: grid;
+  place-items: center;
+  background: var(--grey-darkest, #272a2a);
+  color: #fff;
+  border-left: 1px solid rgba(0, 0, 0, 0.15);
+  font-size: 1.1rem;
+  line-height: 1;
+}
+
+.hq-footer-bottom {
+  margin-top: 3rem;
+  padding-top: 1.5rem;
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem 1.5rem;
+  font-size: 0.75rem;
+  color: rgba(255, 255, 255, 0.35);
+}
+
+.hq-footer-bottom a {
+  color: rgba(255, 255, 255, 0.45);
+  transition: color 0.2s;
+}
+
+.hq-footer-bottom a:hover {
+  color: var(--green-light, #c5e5a3);
+}
+
+.hq-footer-credit {
+  margin-left: auto;
+}
+
+@media (max-width: 959px) {
+  .hq-site-footer {
+    padding: 3rem 1.25rem 3.5rem;
+  }
+
+  .hq-footer-cta-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .hq-footer-cta-action {
+    justify-content: flex-start;
+  }
+
+  .hq-footer-links-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .hq-footer-credit {
+    margin-left: 0;
+  }
+}
+
+@media (max-width: 520px) {
+  .hq-footer-links-grid {
+    grid-template-columns: 1fr;
+  }
+}
