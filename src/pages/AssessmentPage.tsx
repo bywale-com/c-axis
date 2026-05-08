@@ -255,7 +255,7 @@ const AssessmentPage: React.FC = () => {
     setSubmitting(true);
     setSubmitError(null);
 
-    if (tokenRef.current) {
+    if (tokenRef.current && supabase) {
       const { error } = await supabase
         .from("new_bookings")
         .update({
