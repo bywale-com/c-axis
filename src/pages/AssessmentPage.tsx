@@ -1,6 +1,7 @@
 import React, { useEffect, useRef, useState } from "react";
 import { Footer } from "../components/Footer";
 import { HeaderLogo } from "../components/Logo";
+import { supabase } from "../lib/supabase";
 import "./AssessmentPage.css";
 
 const SMS_NUMBER = "[your number]"; // ← replace with actual SMS number
@@ -172,11 +173,17 @@ function getTier(score: number) {
 const AssessmentPage: React.FC = () => {
   const [answers, setAnswers] = useState<Answers>({});
   const [submitted, setSubmitted] = useState(false);
+  const [submitting, setSubmitting] = useState(false);
+  const [submitError, setSubmitError] = useState<string | null>(null);
   const [result, setResult] = useState<{ score: number; tier: ReturnType<typeof getTier> } | null>(null);
   const utmRef = useRef<Record<string, string>>({});
+  const tokenRef = useRef<string | null>(null);
 
   useEffect(() => {
     const params = new URLSearchParams(window.location.search);
+    // capture token
+    tokenRef.current = params.get("token");
+    // capture UTM params
     const utm: Record<string, string> = {};
     for (const key of ["utm_source", "utm_medium", "utm_campaign", "utm_content", "utm_term"]) {
       const val = params.get(key);
@@ -206,20 +213,68 @@ const AssessmentPage: React.FC = () => {
     });
   }
 
-  function handleSubmit(e: React.FormEvent) {
+  async function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
+    if (submitting) return;
+
     const score = calcScore(answers);
     const tier = getTier(score);
-    setResult({ score, tier });
-    setSubmitted(true);
-    // TODO: persist to Supabase assessments table
-    console.log({
+    const submittedAt = new Date().toISOString();
+
+    // Build human-readable answer map for pre-call briefing
+    const answerMap: Record<string, { question: string; answer: string | string[]; score: number }> = {};
+    for (const q of QUESTIONS) {
+      const ans = answers[q.id];
+      if (ans === undefined) continue;
+      if (q.type === "multi") {
+        const selected = ans as number[];
+        const labels = selected.map((i) => q.options[i]?.label ?? "");
+        const pts = Math.min(
+          selected.reduce((sum, i) => sum + (q.options[i]?.score ?? 0), 0),
+          q.maxScore ?? Infinity,
+        );
+        answerMap[q.id] = { question: q.label, answer: labels, score: pts };
+      } else {
+        const idx = ans as number;
+        answerMap[q.id] = {
+          question: q.label,
+          answer: q.options[idx]?.label ?? "",
+          score: q.options[idx]?.score ?? 0,
+        };
+      }
+    }
+
+    const submission = {
+      answers: answerMap,
       score,
       tier: tier.label,
-      answers,
       utm: utmRef.current,
-      timestamp: new Date().toISOString(),
-    });
+      submitted_at: submittedAt,
+    };
+
+    setSubmitting(true);
+    setSubmitError(null);
+
+    if (tokenRef.current) {
+      const { error } = await supabase
+        .from("new_bookings")
+        .update({
+          submission,
+          submitted_at: submittedAt,
+          status: "completed",
+        })
+        .eq("token", tokenRef.current)
+        .is("submitted_at", null); // prevent double-submit
+
+      if (error) {
+        console.error("Supabase error:", error);
+        setSubmitError("Something went wrong saving your response. Your score is shown below.");
+      }
+    }
+
+    setResult({ score, tier });
+    setSubmitted(true);
+    setSubmitting(false);
   }
 
   return (
@@ -324,14 +379,17 @@ const AssessmentPage: React.FC = () => {
                 </div>
 
                 <div className="asl-form__footer">
-                  <button type="submit" className="asl-submit" disabled={!allAnswered}>
-                    Get my score
+                  <button type="submit" className="asl-submit" disabled={!allAnswered || submitting}>
+                    {submitting ? "Saving…" : "Get my score"}
                   </button>
-                  {!allAnswered && (
+                  {!allAnswered && !submitting && (
                     <p className="asl-form__remaining">
                       {QUESTIONS.length - answeredCount} question
                       {QUESTIONS.length - answeredCount !== 1 ? "s" : ""} remaining
                     </p>
+                  )}
+                  {submitError && (
+                    <p className="asl-form__remaining" style={{ color: "#c0392b" }}>{submitError}</p>
                   )}
                 </div>
               </form>
