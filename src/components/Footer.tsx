@@ -33,7 +33,7 @@ const InstagramIcon = () => (
 
 /** Social targets — update Instagram when a public profile exists */
 const SOCIAL = [
-  { label: "LinkedIn", href: "https://www.linkedin.com/company/healthquest-capital/", Icon: LinkedInIcon },
+  { label: "LinkedIn", href: "https://www.linkedin.com/company/apexintro/", Icon: LinkedInIcon },
   {
     label: "Instagram",
     href: "https://www.instagram.com/",

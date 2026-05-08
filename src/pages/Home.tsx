@@ -1,5 +1,5 @@
 /**
- * HealthQuest Capital — Homepage
+ * Apex Consulting — Homepage
  * React + TypeScript
  *
  * Scroll math:

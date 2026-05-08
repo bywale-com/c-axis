@@ -25,7 +25,7 @@ const APEX_BRAND_STYLE: React.CSSProperties = {
 
 /**
  * Apex `c-site-header` bar (Apex Consulting + blur “Menu” button) +
- * full-screen HealthQuest menu panel from the previous standalone home.
+ * full-screen menu panel.
  */
 export const Nav: React.FC = () => {
   const [open, setOpen] = useState(false);
@@ -166,7 +166,7 @@ export const Nav: React.FC = () => {
 };
 
 const NAV_STYLES = `
-/* Sit above full-screen HealthQuest menu */
+/* Sit above full-screen menu */
 .hq-nav-apex.c-site-header {
   position: fixed;
   top: 0;
@@ -208,7 +208,7 @@ const NAV_STYLES = `
   box-shadow: 0 6px 18px rgba(15, 17, 24, 0.08);
 }
 
-/* Full-screen menu — HealthQuest (standalone home) */
+/* Full-screen menu */
 .hq-menu {
   position: fixed;
   inset: 0;
