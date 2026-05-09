@@ -52,6 +52,7 @@
 import React, { useEffect, useRef, useState } from "react";
 import { ApexStatMorph } from "../components/ApexStatMorph";
 import { ArrowButton } from "../components/ArrowButton";
+import { DecodeText } from "../components/DecodeText";
 import { LatestNewsSection } from "../components/LatestNewsSection";
 
 const OUR_FOCUS = [
@@ -388,17 +389,13 @@ const Home: React.FC = () => {
       <style>{STYLES}</style>
       {showPreloader && (
         <div className={`hq-home-preloader${preloaderExiting ? " hq-home-preloader--exit" : ""}`} aria-hidden>
-          <div className="hq-home-preloader__cube">
-            <div className="hq-cube-stage">
-              <div className="hq-cube-roll">
-                <div className="hq-cube-face hq-cube-face--front">Offer Design</div>
-                <div className="hq-cube-face hq-cube-face--back">Pipeline</div>
-                <div className="hq-cube-face hq-cube-face--left">Revenue</div>
-                <div className="hq-cube-face hq-cube-face--right">Systems</div>
-                <div className="hq-cube-face hq-cube-face--top">Audit</div>
-                <div className="hq-cube-face hq-cube-face--bottom">Results</div>
-              </div>
-            </div>
+          <div className="hq-home-preloader__decode">
+            <DecodeText
+              text="Om Coda"
+              duration={2200}
+              isActive={true}
+              className="hq-home-preloader__decode-text"
+            />
           </div>
         </div>
       )}
@@ -676,19 +673,17 @@ const STYLES = `
   from { transform: translateY(0); }
   to { transform: translateY(-100%); }
 }
-.hq-home-preloader__cube {
-  width: min(72vw, 460px);
-  min-height: 280px;
-  display: grid;
-  place-items: center;
+.hq-home-preloader__decode {
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
-.hq-home-preloader .hq-cube-roll {
-  animation-duration: 3.8s;
-}
-.hq-home-preloader .hq-cube-face {
-  border: 2px solid rgba(15, 17, 24, 0.2);
-  color: #0f1118;
-  background-color: #ffffff;
+.hq-home-preloader__decode-text {
+  font-family: 'Instrument Sans', sans-serif;
+  font-size: clamp(2.5rem, 8vw, 5rem);
+  font-weight: 600;
+  letter-spacing: -0.03em;
+  color: #ffffff;
 }
 
 /* ── imageZoom — source: animation:zoomOut 1s ease forwards ─────────── */
